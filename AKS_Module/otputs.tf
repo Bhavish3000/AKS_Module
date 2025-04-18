@@ -23,3 +23,7 @@ output "cluster_credentials" {
   description = "Command to get the configuration details of te cluster"
   value       =  "az aks get-credentials --resource-group ${azurerm_resource_group.main.name} --name ${azurerm_kubernetes_cluster.main.name} --overwrite-existing"
 }
+
+output "grafana_url" {
+  value = azurerm_dashboard_grafana.grafana.endpoint
+}

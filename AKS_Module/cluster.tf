@@ -1,4 +1,5 @@
 resource "azurerm_kubernetes_cluster" "main" {
+
   name                = var.kubernetes_cluster.name
   location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
@@ -14,4 +15,14 @@ resource "azurerm_kubernetes_cluster" "main" {
   identity {
     type = var.kubernetes_cluster.identity_type
   }
+
+  monitor_metrics {
+    annotations_allowed = null
+    labels_allowed      = null
+  }
+
+  oms_agent {
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.logs.id
+  }
+
 }

@@ -34,3 +34,43 @@ variable "kubernetes_cluster" {
   }
 
 }
+
+variable "log_analytics_workspace" {
+  type = object({
+    name = string
+    sku                 = string
+    retention_in_days   = number
+  })
+
+  default = {
+    name = "AKS-log-analytics-workspace"
+    sku                 = "PerGB2018"
+    retention_in_days   = 30
+  }
+  
+}
+
+
+variable "monitor_workspace" {
+  type = object({
+    name = string
+  })
+
+  default = {
+    name = "aks-prometheus-workspace"
+  }
+}
+
+variable "dashboard_grafana" {
+  type = object({
+    name = string
+    sku = string
+    grafana_major_version = number
+  })
+  
+  default = {
+    name = "aks-grafana"
+    sku = "Standard"
+    grafana_major_version = 11
+  }
+}
